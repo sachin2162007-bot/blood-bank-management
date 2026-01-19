@@ -13,65 +13,88 @@ def get_db():
     conn.row_factory = sqlite3.Row
     return conn
 
+# ---------- INIT DATABASE ----------
 def init_db():
     db = get_db()
     cursor = db.cursor()
 
     # Admins
     cursor.execute("""
-    CREATE TABLE IF NOT EXISTS admins (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        username TEXT,
-        password TEXT
-    )
+        CREATE TABLE IF NOT EXISTS admins (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            username TEXT,
+            password TEXT
+        )
     """)
 
     # Patients
     cursor.execute("""
-    CREATE TABLE IF NOT EXISTS patients (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT,
-        blood_group TEXT,
-        phone TEXT,
-        status TEXT
-    )
+        CREATE TABLE IF NOT EXISTS patients (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT,
+            blood_group TEXT,
+            phone TEXT,
+            status TEXT
+        )
     """)
 
     # Donors
     cursor.execute("""
-    CREATE TABLE IF NOT EXISTS donors (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        full_name TEXT,
-        dob TEXT,
-        gender TEXT,
-        blood_group TEXT,
-        phone TEXT,
-        email TEXT,
-        address TEXT,
-        weight TEXT,
-        last_donation TEXT,
-        medications TEXT,
-        conditions TEXT,
-        tattoo TEXT,
-        donation_date TEXT,
-        donation_center TEXT,
-        frequency TEXT,
-        consent INTEGER
-    )
+        CREATE TABLE IF NOT EXISTS donors (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            full_name TEXT,
+            dob TEXT,
+            gender TEXT,
+            blood_group TEXT,
+            phone TEXT,
+            email TEXT,
+            address TEXT,
+            weight TEXT,
+            last_donation TEXT,
+            medications TEXT,
+            conditions TEXT,
+            tattoo TEXT,
+            donation_date TEXT,
+            donation_center TEXT,
+            frequency TEXT,
+            consent INTEGER
+        )
     """)
 
     # Blood stock
     cursor.execute("""
-    CREATE TABLE IF NOT EXISTS blood_stock (
-        blood_group TEXT PRIMARY KEY,
-        units INTEGER
-    )
+        CREATE TABLE IF NOT EXISTS blood_stock (
+            blood_group TEXT PRIMARY KEY,
+            units INTEGER
+        )
     """)
 
     db.commit()
     db.close()
 
+# ---------- DEFAULT ADMIN ----------
+def create_default_admin():
+    db = get_db()
+    cursor = db.cursor()
+
+    cursor.execute(
+        "SELECT * FROM admins WHERE username = ?",
+        ("admin",)
+    )
+    admin = cursor.fetchone()
+
+    if not admin:
+        cursor.execute(
+            "INSERT INTO admins (username, password) VALUES (?, ?)",
+            ("admin", "admin123")
+        )
+        db.commit()
+
+    db.close()
+
+# Run DB setup
 init_db()
+create_default_admin()
 
 # ---------- HOME ----------
 @app.route("/")
@@ -135,28 +158,25 @@ def approve_patient(pid):
     cursor.execute("SELECT blood_group FROM patients WHERE id=?", (pid,))
     result = cursor.fetchone()
 
-    if not result:
-        db.close()
-        return redirect(url_for("view_patients"))
+    if result:
+        blood_group = result["blood_group"]
 
-    blood_group = result["blood_group"]
-
-    cursor.execute(
-        "SELECT units FROM blood_stock WHERE blood_group=?",
-        (blood_group,)
-    )
-    stock = cursor.fetchone()
-
-    if stock and stock["units"] > 0:
         cursor.execute(
-            "UPDATE blood_stock SET units = units - 1 WHERE blood_group=?",
+            "SELECT units FROM blood_stock WHERE blood_group=?",
             (blood_group,)
         )
-        cursor.execute(
-            "UPDATE patients SET status='Approved' WHERE id=?",
-            (pid,)
-        )
-        db.commit()
+        stock = cursor.fetchone()
+
+        if stock and stock["units"] > 0:
+            cursor.execute(
+                "UPDATE blood_stock SET units = units - 1 WHERE blood_group=?",
+                (blood_group,)
+            )
+            cursor.execute(
+                "UPDATE patients SET status='Approved' WHERE id=?",
+                (pid,)
+            )
+            db.commit()
 
     db.close()
     return redirect(url_for("view_patients"))
@@ -191,11 +211,11 @@ def donor_register():
         cursor = db.cursor()
 
         cursor.execute("""
-        INSERT INTO donors (
-            full_name, dob, gender, blood_group, phone, email, address,
-            weight, last_donation, medications, conditions, tattoo,
-            donation_date, donation_center, frequency, consent
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            INSERT INTO donors (
+                full_name, dob, gender, blood_group, phone, email, address,
+                weight, last_donation, medications, conditions, tattoo,
+                donation_date, donation_center, frequency, consent
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """, (
             data.get("full_name"),
             data.get("dob"),
@@ -246,5 +266,3 @@ def patient_request():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
-
-
