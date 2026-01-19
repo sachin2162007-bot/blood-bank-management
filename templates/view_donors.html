@@ -20,10 +20,10 @@
 
         {% for d in donors %}
         <tr>
-            <td>{{ d[0] }}</td>
-            <td>{{ d[1] }}</td>
-            <td>{{ d[2] }}</td>
-            <td>{{ d[3] }}</td>
+            <td>{{ d["id"] }}</td>
+            <td>{{ d["full_name"] }}</td>
+            <td>{{ d["blood_group"] }}</td>
+            <td>{{ d["phone"] }}</td>
         </tr>
         {% endfor %}
     </table>
