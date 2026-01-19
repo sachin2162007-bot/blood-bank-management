@@ -206,19 +206,19 @@ def patient_request():
 
         db = get_db()
         cursor = db.cursor()
-        cursor.execute(
-    "INSERT INTO patients (name, blood_group, phone) VALUES (%s, %s, %s)",
-    (name, blood_group, phone)
-)
 
+        cursor.execute(
+            "INSERT INTO patients (name, blood_group, contact, status) VALUES (%s, %s, %s, %s)",
+            (name, blood_group, phone, "Pending")
+        )
 
         db.commit()
         db.close()
 
-        return "Blood request submitted successfully!"
+        return "Blood request submitted successfully"
 
     return render_template("patient_request.html")
 
 # ---------- RUN ----------
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000)
