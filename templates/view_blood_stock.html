@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blood Stock</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        /* PAGE-SPECIFIC UI (won’t affect others) */
+        .stock-container {
+            max-width: 700px;
+            margin: 60px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .stock-container h2 {
+            color: #d90429;
+            margin-bottom: 25px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 14px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background: #f1f1f1;
+        }
+
+        tr:hover {
+            background: #fafafa;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #6a0dad;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="stock-container">
+    <h2>Blood Stock Availability</h2>
+
+    <table>
+        <tr>
+            <th>Blood Group</th>
+            <th>Units Available</th>
+        </tr>
+
+        {% for s in stock %}
+        <tr>
+            <td>{{ s[0] }}</td>
+            <td>{{ s[1] }}</td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="2">No blood stock available</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <a href="/admin/dashboard" class="back-link">← Back to Dashboard</a>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Donor Registration</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .form-container {
+            max-width: 850px;
+            margin: 40px auto;
+            background: #ffffff;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #d90429;
+            margin-bottom: 30px;
+        }
+
+        fieldset {
+            border: none;
+            margin-bottom: 25px;
+        }
+
+        legend {
+            font-weight: bold;
+            color: #444;
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            margin-top: 12px;
+            font-weight: 500;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        .row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .checkbox {
+            margin-top: 15px;
+        }
+
+        button {
+            background: #d90429;
+            color: white;
+            border: none;
+            padding: 14px;
+            width: 100%;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 25px;
+        }
+
+        button:hover {
+            background: #b50321;
+        }
+
+        @media (max-width: 768px) {
+            .row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Blood Donor Registration</h2>
+
+    <form method="POST">
+
+        <!-- SECTION 1 -->
+        <fieldset>
+            <legend>Identity & Contact</legend>
+
+            <label>Full Name</label>
+            <input type="text" name="full_name" required>
+
+            <div class="row">
+                <div>
+                    <label>Date of Birth</label>
+                    <input type="date" name="dob">
+                </div>
+                <div>
+                    <label>Gender</label>
+                    <select name="gender">
+                        <option>Male</option>
+                        <option>Female</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+            </div>
+
+            <label>Blood Group</label>
+            <select name="blood_group" required>
+                <option value="">Select</option>
+                <option>A+</option><option>A-</option>
+                <option>B+</option><option>B-</option>
+                <option>O+</option><option>O-</option>
+                <option>AB+</option><option>AB-</option>
+            </select>
+
+            <div class="row">
+                <div>
+                    <label>Phone Number</label>
+                    <input type="tel" name="phone" required>
+                </div>
+                <div>
+                    <label>Email</label>
+                    <input type="email" name="email">
+                </div>
+            </div>
+
+            <label>Residential Address</label>
+            <textarea rows="3" name="address"></textarea>
+        </fieldset>
+
+        <!-- SECTION 2 -->
+        <fieldset>
+            <legend>Health Screening</legend>
+
+            <div class="row">
+                <div>
+                    <label>Weight (kg)</label>
+                    <input type="number" min="45" name="weight">
+                </div>
+                <div>
+                    <label>Donated in last 3 months?</label>
+                    <select name="last_donation">
+                        <option>No</option>
+                        <option>Yes</option>
+                    </select>
+                </div>
+            </div>
+
+            <label>Any chronic medical conditions?</label>
+            <textarea rows="2" name="conditions"></textarea>
+        </fieldset>
+
+        <!-- SECTION 3 -->
+        <fieldset>
+            <legend>Consent</legend>
+
+            <div class="checkbox">
+                <input type="checkbox" name="consent" value="1" required>
+                I certify the information provided is true.
+            </div>
+
+            <div class="checkbox">
+                <input type="checkbox" required>
+                I agree to data storage & privacy policy.
+            </div>
+
+            <label>Digital Signature (Full Name)</label>
+            <input type="text" name="signature">
+        </fieldset>
+
+        <button type="submit">Register as Donor</button>
+    </form>
+</div>
+
+</body>
+</html>

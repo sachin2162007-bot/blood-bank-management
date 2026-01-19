@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Patient Blood Request</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="form-container">
+    <h2 class="form-title">Patient Blood Request</h2>
+
+    <form method="POST" class="medical-form">
+
+        <label>Full Name</label>
+        <input type="text" name="name" placeholder="Enter patient name" required>
+
+        <label>Blood Group Required</label>
+        <select name="blood_group" required>
+            <option value="">-- Select Blood Group --</option>
+            <option>A+</option>
+            <option>A-</option>
+            <option>B+</option>
+            <option>B-</option>
+            <option>AB+</option>
+            <option>AB-</option>
+            <option>O+</option>
+            <option>O-</option>
+        </select>
+
+        <label>Phone Number</label>
+        <input type="tel" name="phone" placeholder="Enter contact number" required>
+
+        <button type="submit" class="submit-btn">
+            Submit Blood Request
+        </button>
+
+    </form>
+
+    <a href="/" class="back-link">← Back to Home</a>
+</div>
+
+</body>
+</html>

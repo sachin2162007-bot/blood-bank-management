@@ -1,0 +1,267 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: white;
+}
+
+.home {
+    margin-top: 80px;
+    text-align: center;
+}
+
+.home h1 {
+    color: red;
+    font-size: 34px;
+    margin-bottom: 40px;
+}
+
+.btn {
+    display: block;
+    width: 260px;
+    margin: 15px auto;
+    padding: 14px;
+    background-color: #e60023;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 6px;
+}
+
+.btn:hover {
+    background-color: #b8001b;
+}
+.login-container {
+    width: 350px;
+    margin: 100px auto;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.login-container h2 {
+    color: red;
+    margin-bottom: 25px;
+}
+
+.login-container input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.login-container button {
+    width: 100%;
+    padding: 12px;
+    background: #e60023;
+    color: white;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.login-container button:hover {
+    background: #b8001b;
+}
+
+.back-link {
+    display: block;
+    margin-top: 15px;
+    text-decoration: none;
+    color: #555;
+}
+.dashboard-container {
+    text-align: center;
+    margin-top: 60px;
+}
+
+.dashboard-container h1 {
+    color: red;
+    margin-bottom: 40px;
+}
+
+.dashboard-cards {
+    width: 360px;
+    margin: auto;
+}
+
+.card {
+    display: block;
+    padding: 16px;
+    margin: 15px 0;
+    background: #ffffff;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.card:hover {
+    background: #f7f7f7;
+}
+
+.logout {
+    color: red;
+} 
+.table-container {
+    width: 80%;
+    margin: 60px auto;
+    text-align: center;
+}
+
+.table-container h2 {
+    color: red;
+    margin-bottom: 25px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+th, td {
+    padding: 12px;
+    border: 1px solid #ccc;
+}
+
+th {
+    background: #f2f2f2;
+    font-weight: bold;
+}
+
+tr:hover {
+    background: #fafafa;
+}
+.approve-btn {
+    padding: 6px 12px;
+    background: #28a745;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.approve-btn:hover {
+    background: #218838;
+}
+.form-container {
+    max-width: 420px;
+    margin: 60px auto;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.form-title {
+    text-align: center;
+    color: #c62828;
+    margin-bottom: 25px;
+}
+
+.medical-form label {
+    display: block;
+    margin-top: 15px;
+    font-weight: 600;
+}
+
+.medical-form input,
+.medical-form select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.submit-btn {
+    width: 100%;
+    margin-top: 25px;
+    padding: 12px;
+    background: #c62828;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background: #a71d1d;
+}
+
+.back-link {
+    display: block;
+    margin-top: 20px;
+    text-align: center;
+    color: #555;
+    text-decoration: none;
+}
+/* ===== HOME PAGE ONLY ===== */
+
+.home-body {
+    margin: 0;
+    height: 100vh;
+    background-image: url("/static/images/blood_bg.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: Arial, sans-serif;
+}
+
+/* Dark overlay */
+.home-overlay {
+    background: rgba(0, 0, 0, 0.55);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Center card */
+.home-card {
+    background: white;
+    padding: 40px 50px;
+    border-radius: 15px;
+    text-align: center;
+    width: 380px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+}
+
+.home-card h1 {
+    color: #d90429;
+    margin-bottom: 30px;
+    font-size: 26px;
+    line-height: 1.3;
+}
+
+/* Buttons */
+.home-btn {
+    display: block;
+    background: #d90429;
+    color: white;
+    text-decoration: none;
+    padding: 14px;
+    margin: 12px 0;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.home-btn:hover {
+    background: #b7031e;
+}
+
+
+

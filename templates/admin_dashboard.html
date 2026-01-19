@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="dashboard-container">
+    <h1>Admin Dashboard</h1>
+
+    <div class="dashboard-cards">
+        <a href="/admin/donors" class="card">👥 View Donors</a>
+        <a href="/admin/patients" class="card">🩸 View Patient Requests</a>
+        <a href="/admin/stock" class="card">📦 Manage Blood Stock</a>
+        <a href="/admin/view-stock" class="card">📊 View Blood Stock</a>
+        <a href="/" class="card logout">🚪 Logout</a>
+    </div>
+</div>
+
+</body>
+</html>
