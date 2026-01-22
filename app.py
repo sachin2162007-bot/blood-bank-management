@@ -134,10 +134,18 @@ def admin_dashboard():
 def view_donors():
     db = get_db()
     cursor = db.cursor()
-    cursor.execute("SELECT * FROM donors")
+    cursor.execute("""
+        SELECT 
+            id,
+            full_name,
+            blood_group,
+            phone
+        FROM donors
+    """)
     donors = cursor.fetchall()
     db.close()
     return render_template("view_donors.html", donors=donors)
+
 
 # ---------- VIEW PATIENTS ----------
 @app.route("/admin/patients")
